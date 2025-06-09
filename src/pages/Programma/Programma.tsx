@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 
 const ProgrammaPage: React.FC = () => {
   return (
-    <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
+    <Container maxWidth={false} sx={{ mt: 4, mb: 4 }}>
       <Typography variant="h3" component="h1" gutterBottom align="center">
         Programma della Giornata
       </Typography>

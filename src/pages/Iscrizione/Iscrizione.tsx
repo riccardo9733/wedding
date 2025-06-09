@@ -42,7 +42,7 @@ const IscrizionePage: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 4, mb: 4 }}>
+    <Container maxWidth={false} sx={{ mt: 4, mb: 4 }}>
       <Typography variant="h3" component="h1" gutterBottom align="center">
         Conferma la tua Presenza
       </Typography>

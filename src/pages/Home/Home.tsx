@@ -9,7 +9,7 @@ import CardContent from '@mui/material/CardContent';
 
 const HomePage: React.FC = () => {
   return (
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+    <Container maxWidth={false} sx={{ mt: 4, mb: 4 }}>
       <Grid container spacing={3} justifyContent="center">
         {/* Welcome Message and Event Info */}
         <Grid item xs={12}>
