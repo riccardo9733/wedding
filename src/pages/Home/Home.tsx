@@ -1,12 +1,32 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-// Container was used before, but the new design implies full-width sections
-// If global padding is desired for content *below* the hero, it can be added there.
+import Container from '@mui/material/Container';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Button from '@mui/material/Button';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { Link } from 'react-router-dom';
 
 const HomePage: React.FC = () => {
-  // AppBar height is assumed to be 64px. If it's different, this value should be adjusted.
-  // Or, this height could be dynamically calculated if the AppBar height can change.
+  const theme = useTheme();
+  const isXs = useMediaQuery(theme.breakpoints.only('xs'));
+  const isSm = useMediaQuery(theme.breakpoints.only('sm'));
+  const isMd = useMediaQuery(theme.breakpoints.only('md'));
+  // lg and xl will use the default 'cols' value from getCols
+
+  const getCols = () => {
+    if (isXs) return 1;
+    if (isSm) return 2;
+    if (isMd) return 3;
+    return 4; // For lg and xl screens
+  };
+
+  const cols = getCols();
   const appBarHeight = '64px';
   const heroHeight = `calc(85vh - ${appBarHeight})`; // Using 85vh for a larger hero
 
