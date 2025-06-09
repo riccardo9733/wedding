@@ -1,24 +1,25 @@
 import { createTheme } from '@mui/material/styles';
 
-const palePink = '#FFDDF0'; // A pale pink color
+// const palePink = '#FFDDF0'; // No longer default background
+const whiteColor = '#FFFFFF';
 const blackText = '#000000';
 
 const theme = createTheme({
   palette: {
     primary: {
       main: '#1976d2', // Blue - for buttons, interactive elements
-      contrastText: '#ffffff', // Ensure text on primary buttons is white
+      contrastText: whiteColor, // Ensure text on primary buttons is white
     },
     secondary: {
       main: '#dc004e', // Pink/Red - for accents, secondary actions
-      contrastText: '#ffffff', // Ensure text on secondary buttons is white
+      contrastText: whiteColor, // Ensure text on secondary buttons is white
     },
     background: {
-      default: palePink,
-      paper: '#ffffff', // Keep paper white for elements like Cards, Drawers, Menus
+      default: whiteColor, // Main page background is now white
+      paper: whiteColor,   // Background for components like Card, Drawer, Menu
     },
     text: {
-      primary: blackText, // Black for main text
+      primary: blackText,   // Black for main text
       secondary: '#424242', // Darker gray for secondary text
     },
   },
@@ -36,22 +37,21 @@ const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: palePink,
-          color: blackText, // Default text/icon color for AppBar content
+          backgroundColor: whiteColor, // AppBar background is now white
+          color: blackText,           // Default text/icon color for AppBar content
+          boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.06), 0px 4px 5px 0px rgba(0,0,0,0.04), 0px 1px 10px 0px rgba(0,0,0,0.03)', // A subtle shadow like theme.shadows[2] or [1]
+          // borderBottom: `1px solid ${grey[300]}`, // Alternative: a subtle border
         },
       },
     },
     MuiButton: {
       styleOverrides: {
-        // Contained buttons use palette.primary/secondary.contrastText by default.
-        // We ensure here they are explicitly set if needed.
         containedPrimary: {
-          color: '#ffffff',
+          color: whiteColor,
         },
         containedSecondary: {
-          color: '#ffffff',
+          color: whiteColor,
         },
-        // Text buttons on AppBar should be black
         textInherit: { // Assuming 'inherit' is used for AppBar buttons
           color: blackText,
           '&:hover': {
@@ -65,9 +65,6 @@ const theme = createTheme({
         root: {
           color: blackText, // Default IconButton color (e.g., MenuIcon on AppBar)
         },
-        // If you have IconButtons with specific colors like primary/secondary:
-        // colorPrimary: { color: '#1976d2' },
-        // colorSecondary: { color: '#dc004e' },
       },
     },
     MuiLink: {
@@ -76,26 +73,13 @@ const theme = createTheme({
           color: blackText, // Make links black by default
           textDecoration: 'underline',
           '&:hover': {
-            color: '#1976d2', // Link hover color
+            color: '#1976d2', // Link hover color (primary.main)
           }
         }
       }
     },
-    MuiTypography: {
-      styleOverrides: {
-        root: {
-          // Ensure Typography components inherit color correctly within AppBar
-          // This might not be strictly necessary if direct color props are used on Typography
-          // or if the AppBar's `color` style is sufficient.
-        },
-        // Ensure link-like Typography also uses blackText
-        // This is for the "Beatrice e Enrico" in AppBar if it's a Typography wrapping a RouterLink
-        colorInherit: { // If Typography has color="inherit"
-           // This specific override needs to be carefully considered.
-           // Generally, `color: blackText` in `MuiAppBar.styleOverrides.root` should cover it.
-        }
-      }
-    }
+    // MuiTypography is not strictly needed here as text color is handled by direct settings
+    // and inheritance from MuiAppBar's color override.
   }
 });
 
