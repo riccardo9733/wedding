@@ -30,11 +30,40 @@ const HomePage: React.FC = () => {
   const appBarHeight = '64px';
   const heroHeight = `calc(85vh - ${appBarHeight})`; // Using 85vh for a larger hero
 
-  const fixedImageUrl = "https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
-  const itemData = Array.from({ length: 8 }, (_, i) => ({
-    img: fixedImageUrl,
-    title: `Location Image ${i + 1}`,
-  }));
+  const itemData = [
+    {
+      img: 'https://images.pexels.com/photos/158028/baskets-sale-marketplace-shops-158028.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: 'Portrait Basket',
+    },
+    {
+      img: 'https://images.pexels.com/photos/2478248/pexels-photo-2478248.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      title: 'Wide Landscape Mountains',
+    },
+    {
+      img: 'https://images.pexels.com/photos/269948/pexels-photo-269948.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: 'Square-ish Food',
+    },
+    {
+      img: 'https://images.pexels.com/photos/326900/pexels-photo-326900.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: 'Very Tall Plant',
+    },
+    {
+      img: 'https://images.pexels.com/photos/1591373/pexels-photo-1591373.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      title: 'Panorama Beach',
+    },
+    {
+      img: 'https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      title: 'Standard Landscape Aurora',
+    },
+    {
+      img: 'https://images.pexels.com/photos/1036627/pexels-photo-1036627.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: 'Another Portrait Woman',
+    },
+    {
+      img: 'https://images.pexels.com/photos/2486168/pexels-photo-2486168.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      title: 'Wider Landscape Abstract',
+    },
+  ];
 
   return (
     <Box component="article"> {/* Using article for semantic grouping of the page content */}
@@ -151,16 +180,16 @@ const HomePage: React.FC = () => {
           cols={cols}
           gap={16} // Increased gap for better visual separation
         >
-          {itemData.map((item, index) => (
-            <ImageListItem key={index}>
+          {itemData.map((item) => ( // Changed key from index to item.img for stable identity
+            <ImageListItem key={item.img}>
               <img
-                src={item.img} // Use the exact URL stored in item.img
-                // Removed srcSet to ensure the exact src is used.
+                src={item.img}
                 alt={item.title}
                 loading="lazy"
                 style={{
-                  border: '1px solid #eee', // Subtle border around images
-                  borderRadius: '8px',     // Rounded corners for images
+                  // Retaining previous styling for consistency
+                  border: '1px solid #eee',
+                  borderRadius: '8px',
                   display: 'block',
                   width: '100%',
                 }}
