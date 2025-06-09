@@ -30,6 +30,12 @@ const HomePage: React.FC = () => {
   const appBarHeight = '64px';
   const heroHeight = `calc(85vh - ${appBarHeight})`; // Using 85vh for a larger hero
 
+  const fixedImageUrl = "https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
+  const itemData = Array.from({ length: 8 }, (_, i) => ({
+    img: fixedImageUrl,
+    title: `Location Image ${i + 1}`,
+  }));
+
   return (
     <Box component="article"> {/* Using article for semantic grouping of the page content */}
       {/* Hero Section */}
@@ -148,8 +154,8 @@ const HomePage: React.FC = () => {
           {itemData.map((item, index) => (
             <ImageListItem key={index}>
               <img
-                src={`${item.img}?w=248&fit=crop&auto=format`} // Standard MUI ImageList query params
-                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                src={item.img} // Use the exact URL stored in item.img
+                // Removed srcSet to ensure the exact src is used.
                 alt={item.title}
                 loading="lazy"
                 style={{
