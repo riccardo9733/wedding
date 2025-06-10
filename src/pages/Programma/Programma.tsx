@@ -16,7 +16,14 @@ import LocalBarIcon from '@mui/icons-material/LocalBar';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import CelebrationIcon from '@mui/icons-material/Celebration';
 
+// MUI Hooks
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 const ProgrammaPage: React.FC = () => {
+  const theme = useTheme();
+  const isXs = useMediaQuery(theme.breakpoints.only('xs'));
+
   // AppBar height is assumed to be 64px.
   const appBarHeight = '64px';
   // Calculate 100% of viewport height minus the AppBar's height
@@ -35,8 +42,8 @@ const ProgrammaPage: React.FC = () => {
         }}
       >
         <img
-          src="https://images.pexels.com/photos/262047/pexels-photo-262047.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-          alt="Locanda dei Sposini - Sala ricevimenti elegante"
+          src="https://images.pexels.com/photos/16192782/pexels-photo-16192782/free-photo-of-elegant-bride-and-groom-posing-together-in-orchard.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+          alt="Elegant bride and groom posing in an orchard"
           style={{
             width: '100%',
             height: '100%',
