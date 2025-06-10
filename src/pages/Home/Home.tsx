@@ -2,31 +2,14 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { Link } from 'react-router-dom';
+import Gallery from '../../components/Gallery';
 
 const HomePage: React.FC = () => {
-  const theme = useTheme();
-  const isXs = useMediaQuery(theme.breakpoints.only('xs'));
-  const isSm = useMediaQuery(theme.breakpoints.only('sm'));
-  const isMd = useMediaQuery(theme.breakpoints.only('md'));
-  // lg and xl will use the default 'cols' value from getCols
-
-  const getCols = () => {
-    if (isXs) return 2; // Changed from 1 to 2 for xs screens
-    if (isSm) return 2;
-    if (isMd) return 3;
-    return 4; // For lg and xl screens
-  };
-
-  const cols = getCols();
   const appBarHeight = '64px';
   const heroHeight = `calc(85vh - ${appBarHeight})`; // Using 85vh for a larger hero
 
@@ -175,40 +158,7 @@ const HomePage: React.FC = () => {
         <Typography variant="h4" component="h2" textAlign="center" sx={{ mb: { xs: 3, sm: 4, md: 6 } }}>
           Un Assaggio della Location
         </Typography>
-        <ImageList
-          variant="masonry"
-          cols={cols}
-          gap={16} // Increased gap for better visual separation
-        >
-          {itemData.map((item) => {
-            // Determine column span for the item
-            let itemCols = 1; // Default to 1 column span for md, lg, xl and even sm where ImageList cols >= 2
-            if (isXs) {
-              // For xs screens (where ImageList cols is 2), ~30% chance to span 2 columns (full width)
-              itemCols = Math.random() < 0.3 ? 2 : 1;
-            }
-            // For sm screens (where ImageList cols is 2), all items will span 1 column by default.
-            // No specific random logic for 'sm' is requested, so items will just be 1 col wide.
-            // If 'sm' also needed random spanning, similar logic could be added:
-            // else if (isSm) { itemCols = Math.random() < 0.X ? 2 : 1; }
-
-            return (
-              <ImageListItem key={item.img} cols={itemCols}>
-                <img
-                  src={item.img}
-                alt={item.title}
-                loading="lazy"
-                style={{
-                  // Retaining previous styling for consistency
-                  border: '1px solid #eee',
-                  borderRadius: '8px',
-                  display: 'block',
-                  width: '100%',
-                }}
-              />
-            </ImageListItem>
-          ))}
-        </ImageList>
+        <Gallery images={itemData} enableRandomCols={true} />
       </Container>
 
       {/* Registration CTA Section */}

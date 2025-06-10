@@ -9,27 +9,15 @@ import LocalBarIcon from '@mui/icons-material/LocalBar';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import CelebrationIcon from '@mui/icons-material/Celebration';
 
-// MUI Hooks
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-
-// Gallery components (if not already imported, though they should be for HomePage)
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-
 // List components
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
+import Gallery from '../../components/Gallery';
 
 const ProgrammaPage: React.FC = () => {
-  const theme = useTheme();
-  const isXs = useMediaQuery(theme.breakpoints.only('xs')); // Retained for now, though not used in List
-  const isSm = useMediaQuery(theme.breakpoints.only('sm')); // Added for getGalleryCols
-  const isMd = useMediaQuery(theme.breakpoints.only('md')); // Added for getGalleryCols
-
   // Data for the new gallery
   const galleryItemData = [
     {
@@ -49,15 +37,6 @@ const ProgrammaPage: React.FC = () => {
       title: 'Very Tall Plant',
     },
   ];
-
-  // Responsive columns for the new gallery (4 items)
-  const getGalleryCols = () => {
-    if (isXs) return 1;
-    if (isSm) return 2;
-    if (isMd) return 2;
-    return 4; // On lg and up, all 4 images can fit in a row.
-  };
-  const galleryCols = getGalleryCols();
 
   // Define the events data for the List
   const events = [
@@ -165,27 +144,7 @@ const ProgrammaPage: React.FC = () => {
         <Typography variant="h4" component="h2" textAlign="center" sx={{ mb: { xs: 2, sm: 4 } }}> {/* Adjusted margin bottom */}
           Scopri di Più sulla Location
         </Typography>
-        <ImageList
-          variant="masonry"
-          cols={galleryCols}
-          gap={16}
-        >
-          {galleryItemData.map((item) => (
-            <ImageListItem key={item.img}>
-              <img
-                src={item.img}
-                alt={item.title}
-                loading="lazy"
-                style={{
-                  border: '1px solid #eee', // Consistent with Home page gallery
-                  borderRadius: '8px',    // Consistent with Home page gallery
-                  display: 'block',
-                  width: '100%',
-                }}
-              />
-            </ImageListItem>
-          ))}
-        </ImageList>
+        <Gallery images={galleryItemData} />
       </Container>
 
       {/* Timeline section will be added below here */}
