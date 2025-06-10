@@ -20,9 +20,44 @@ import CelebrationIcon from '@mui/icons-material/Celebration';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
+// Gallery components (if not already imported, though they should be for HomePage)
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+
 const ProgrammaPage: React.FC = () => {
   const theme = useTheme();
   const isXs = useMediaQuery(theme.breakpoints.only('xs'));
+  const isSm = useMediaQuery(theme.breakpoints.only('sm')); // Added for getGalleryCols
+  const isMd = useMediaQuery(theme.breakpoints.only('md')); // Added for getGalleryCols
+
+  // Data for the new gallery
+  const galleryItemData = [
+    {
+      img: 'https://images.pexels.com/photos/158028/baskets-sale-marketplace-shops-158028.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: 'Portrait Basket',
+    },
+    {
+      img: 'https://images.pexels.com/photos/2478248/pexels-photo-2478248.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      title: 'Wide Landscape Mountains',
+    },
+    {
+      img: 'https://images.pexels.com/photos/269948/pexels-photo-269948.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: 'Square-ish Food',
+    },
+    {
+      img: 'https://images.pexels.com/photos/326900/pexels-photo-326900.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: 'Very Tall Plant',
+    },
+  ];
+
+  // Responsive columns for the new gallery (4 items)
+  const getGalleryCols = () => {
+    if (isXs) return 1;
+    if (isSm) return 2;
+    if (isMd) return 2;
+    return 4; // On lg and up, all 4 images can fit in a row.
+  };
+  const galleryCols = getGalleryCols();
 
   // AppBar height is assumed to be 64px.
   const appBarHeight = '64px';
@@ -107,36 +142,62 @@ const ProgrammaPage: React.FC = () => {
         </Box>
       </Box>
 
+      {/* Location Information Section */}
+      <Container maxWidth="md" sx={{ pt: { xs: 4, sm: 5, md: 6 }, pb: { xs: 2, sm: 3, md: 4 } }}>
+        <Typography variant="h4" component="h2" textAlign="center" sx={{ mb: { xs: 2, sm: 3 } }}>
+          La Nostra Location Speciale
+        </Typography>
+        <Typography variant="body1" color="text.secondary" textAlign="left" sx={{ lineHeight: 1.75, textIndent: '1.5em' /* Optional: for a slight indent */ }}>
+          Descrizione dettagliata della splendida location che ospiterà il nostro giorno speciale. Immersa nel verde, con panorami mozzafiato e angoli romantici, è il luogo perfetto per celebrare il nostro amore e creare ricordi indimenticabili con voi.
+        </Typography>
+      </Container>
+
+      {/* Location Mini-Gallery Section */}
+      <Container maxWidth="lg" sx={{ pt: { xs: 2, sm: 3, md: 4 }, pb: { xs: 3, sm: 4, md: 6 } }}>
+        <Typography variant="h4" component="h2" textAlign="center" sx={{ mb: { xs: 2, sm: 4 } }}> {/* Adjusted margin bottom */}
+          Scopri di Più sulla Location
+        </Typography>
+        <ImageList
+          variant="masonry"
+          cols={galleryCols}
+          gap={16}
+        >
+          {galleryItemData.map((item) => (
+            <ImageListItem key={item.img}>
+              <img
+                src={item.img}
+                alt={item.title}
+                loading="lazy"
+                style={{
+                  border: '1px solid #eee', // Consistent with Home page gallery
+                  borderRadius: '8px',    // Consistent with Home page gallery
+                  display: 'block',
+                  width: '100%',
+                }}
+              />
+            </ImageListItem>
+          ))}
+        </ImageList>
+      </Container>
+
       {/* Timeline section will be added below here */}
-      <Container maxWidth="md" sx={{ py: { xs: 4, sm: 6, md: 8 } }}>
+      <Container maxWidth="md" sx={{ pt: { xs: 2, sm: 3, md: 4 }, pb: { xs: 4, sm: 6, md: 8 } }}>
         <Typography variant="h4" component="h2" textAlign="center" sx={{ mb: { xs: 4, sm: 6 } }}>
           Il Programma della Giornata
         </Typography>
-        <Timeline position="alternate"
-          sx={{
-            [`& .${timelineOppositeContentClasses.root}`]: {
-              display: { xs: 'none', sm: 'block' }, // Hide opposite content on xs screens
-              flex: { sm: 0.2 }, // Apply flex only on sm and up
-              textAlign: 'right',
-              paddingRight: { sm: 2 }
-            },
-          }}
-        >
+        <Timeline position="right"> {/* Changed position to "right" and removed sx for opposite content */}
           {/* Event 1: Cerimonia */}
           <TimelineItem>
-            <TimelineOppositeContent sx={{ m: 'auto 0' }} variant="body2" color="text.secondary">
-              10:00
-            </TimelineOppositeContent>
             <TimelineSeparator>
               <TimelineConnector />
-              <TimelineDot color="primary">
+              <TimelineDot sx={{ backgroundColor: '#FFC0CB' }}>
                 <ChurchIcon />
               </TimelineDot>
               <TimelineConnector />
             </TimelineSeparator>
             <TimelineContent sx={{ py: '12px', px: 2 }}>
               <Typography variant="h6" component="span">
-                {isXs && "10:00 - "}Cerimonia
+                10:00 - Cerimonia
               </Typography>
               <Typography color="text.secondary">Presso la Chiesa di San Giovanni</Typography>
             </TimelineContent>
@@ -144,19 +205,16 @@ const ProgrammaPage: React.FC = () => {
 
           {/* Event 2: Aperitivo */}
           <TimelineItem>
-            <TimelineOppositeContent sx={{ m: 'auto 0' }} variant="body2" color="text.secondary">
-              12:00
-            </TimelineOppositeContent>
             <TimelineSeparator>
               <TimelineConnector />
-              <TimelineDot color="secondary">
+              <TimelineDot sx={{ backgroundColor: '#FFC0CB' }}>
                 <LocalBarIcon />
               </TimelineDot>
               <TimelineConnector />
             </TimelineSeparator>
             <TimelineContent sx={{ py: '12px', px: 2 }}>
               <Typography variant="h6" component="span">
-                {isXs && "12:00 - "}Aperitivo
+                12:00 - Aperitivo
               </Typography>
               <Typography color="text.secondary">Presso la Locanda dei Sposini - Giardino Esterno</Typography>
             </TimelineContent>
@@ -164,19 +222,16 @@ const ProgrammaPage: React.FC = () => {
 
           {/* Event 3: Pranzo */}
           <TimelineItem>
-            <TimelineOppositeContent sx={{ m: 'auto 0' }} variant="body2" color="text.secondary">
-              13:00
-            </TimelineOppositeContent>
             <TimelineSeparator>
               <TimelineConnector />
-              <TimelineDot color="primary">
+              <TimelineDot sx={{ backgroundColor: '#FFC0CB' }}>
                 <RestaurantIcon />
               </TimelineDot>
               <TimelineConnector />
             </TimelineSeparator>
             <TimelineContent sx={{ py: '12px', px: 2 }}>
               <Typography variant="h6" component="span">
-                {isXs && "13:00 - "}Pranzo Nuziale
+                13:00 - Pranzo Nuziale
               </Typography>
               <Typography color="text.secondary">Presso la Locanda dei Sposini - Sala Principale</Typography>
             </TimelineContent>
@@ -184,19 +239,16 @@ const ProgrammaPage: React.FC = () => {
 
           {/* Event 4: After Party */}
           <TimelineItem>
-            <TimelineOppositeContent sx={{ m: 'auto 0' }} variant="body2" color="text.secondary">
-              17:00
-            </TimelineOppositeContent>
             <TimelineSeparator>
               <TimelineConnector />
-              <TimelineDot color="secondary">
+              <TimelineDot sx={{ backgroundColor: '#FFC0CB' }}>
                 <CelebrationIcon />
               </TimelineDot>
-              <TimelineConnector sx={{ minHeight: {xs: 50, sm: 70} }}/> {/* Optional: extend last connector */}
+              <TimelineConnector sx={{ minHeight: {xs: 50, sm: 70} }}/>
             </TimelineSeparator>
             <TimelineContent sx={{ py: '12px', px: 2 }}>
               <Typography variant="h6" component="span">
-                {isXs && "17:00 - "}Taglio della Torta & After Party
+                17:00 - Taglio della Torta & After Party
               </Typography>
               <Typography color="text.secondary">Presso la Locanda dei Sposini - Area Lounge</Typography>
             </TimelineContent>
