@@ -207,7 +207,7 @@ const HomePage: React.FC = () => {
                 }}
               />
             </ImageListItem>
-          )})}
+          ))}
         </ImageList>
       </Container>
 
