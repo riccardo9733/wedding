@@ -185,7 +185,7 @@ const ProgrammaPage: React.FC = () => {
         <Typography variant="h4" component="h2" textAlign="center" sx={{ mb: { xs: 4, sm: 6 } }}>
           Il Programma della Giornata
         </Typography>
-        <Timeline position="right"> {/* Changed position to "right" and removed sx for opposite content */}
+        <Timeline position="right" sx={{ p: 0 }}> {/* Added sx={{ p: 0 }} */}
           {/* Event 1: Cerimonia */}
           <TimelineItem>
             <TimelineSeparator>
@@ -196,10 +196,10 @@ const ProgrammaPage: React.FC = () => {
               <TimelineConnector />
             </TimelineSeparator>
             <TimelineContent sx={{ py: '12px', px: 2 }}>
-              <Typography variant="h6" component="span">
+              <Typography variant="body1" component="span" fontWeight="bold">
                 10:00 - Cerimonia
               </Typography>
-              <Typography color="text.secondary">Presso la Chiesa di San Giovanni</Typography>
+              <Typography variant="body2" color="text.secondary">Presso la Chiesa di San Giovanni</Typography>
             </TimelineContent>
           </TimelineItem>
 
@@ -213,10 +213,10 @@ const ProgrammaPage: React.FC = () => {
               <TimelineConnector />
             </TimelineSeparator>
             <TimelineContent sx={{ py: '12px', px: 2 }}>
-              <Typography variant="h6" component="span">
+              <Typography variant="body1" component="span" fontWeight="bold">
                 12:00 - Aperitivo
               </Typography>
-              <Typography color="text.secondary">Presso la Locanda dei Sposini - Giardino Esterno</Typography>
+              <Typography variant="body2" color="text.secondary">Presso la Locanda dei Sposini - Giardino Esterno</Typography>
             </TimelineContent>
           </TimelineItem>
 
@@ -230,10 +230,10 @@ const ProgrammaPage: React.FC = () => {
               <TimelineConnector />
             </TimelineSeparator>
             <TimelineContent sx={{ py: '12px', px: 2 }}>
-              <Typography variant="h6" component="span">
+              <Typography variant="body1" component="span" fontWeight="bold">
                 13:00 - Pranzo Nuziale
               </Typography>
-              <Typography color="text.secondary">Presso la Locanda dei Sposini - Sala Principale</Typography>
+              <Typography variant="body2" color="text.secondary">Presso la Locanda dei Sposini - Sala Principale</Typography>
             </TimelineContent>
           </TimelineItem>
 
@@ -247,10 +247,10 @@ const ProgrammaPage: React.FC = () => {
               <TimelineConnector sx={{ minHeight: {xs: 50, sm: 70} }}/>
             </TimelineSeparator>
             <TimelineContent sx={{ py: '12px', px: 2 }}>
-              <Typography variant="h6" component="span">
+              <Typography variant="body1" component="span" fontWeight="bold">
                 17:00 - Taglio della Torta & After Party
               </Typography>
-              <Typography color="text.secondary">Presso la Locanda dei Sposini - Area Lounge</Typography>
+              <Typography variant="body2" color="text.secondary">Presso la Locanda dei Sposini - Area Lounge</Typography>
             </TimelineContent>
           </TimelineItem>
         </Timeline>
