@@ -2,15 +2,8 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Timeline from '@mui/lab/Timeline';
-import TimelineItem from '@mui/lab/TimelineItem';
-import TimelineSeparator from '@mui/lab/TimelineSeparator';
-import TimelineConnector from '@mui/lab/TimelineConnector';
-import TimelineContent from '@mui/lab/TimelineContent';
-import TimelineDot from '@mui/lab/TimelineDot';
-import TimelineOppositeContent, { timelineOppositeContentClasses } from '@mui/lab/TimelineOppositeContent'; // Import with classes for sx prop
 
-// Icons
+// Icons (keeping these as they will be reused in the List)
 import ChurchIcon from '@mui/icons-material/Church';
 import LocalBarIcon from '@mui/icons-material/LocalBar';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
@@ -24,9 +17,16 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 
+// List components
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+
 const ProgrammaPage: React.FC = () => {
   const theme = useTheme();
-  const isXs = useMediaQuery(theme.breakpoints.only('xs'));
+  const isXs = useMediaQuery(theme.breakpoints.only('xs')); // Retained for now, though not used in List
   const isSm = useMediaQuery(theme.breakpoints.only('sm')); // Added for getGalleryCols
   const isMd = useMediaQuery(theme.breakpoints.only('md')); // Added for getGalleryCols
 
@@ -185,75 +185,24 @@ const ProgrammaPage: React.FC = () => {
         <Typography variant="h4" component="h2" textAlign="center" sx={{ mb: { xs: 4, sm: 6 } }}>
           Il Programma della Giornata
         </Typography>
-        <Timeline position="right" sx={{ p: 0 }}> {/* Added sx={{ p: 0 }} */}
-          {/* Event 1: Cerimonia */}
-          <TimelineItem>
-            <TimelineSeparator>
-              <TimelineConnector />
-              <TimelineDot sx={{ backgroundColor: '#FFC0CB' }}>
-                <ChurchIcon />
-              </TimelineDot>
-              <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent sx={{ py: '12px', px: 2 }}>
-              <Typography variant="body1" component="span" fontWeight="bold">
-                10:00 - Cerimonia
-              </Typography>
-              <Typography variant="body2" color="text.secondary">Presso la Chiesa di San Giovanni</Typography>
-            </TimelineContent>
-          </TimelineItem>
-
-          {/* Event 2: Aperitivo */}
-          <TimelineItem>
-            <TimelineSeparator>
-              <TimelineConnector />
-              <TimelineDot sx={{ backgroundColor: '#FFC0CB' }}>
-                <LocalBarIcon />
-              </TimelineDot>
-              <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent sx={{ py: '12px', px: 2 }}>
-              <Typography variant="body1" component="span" fontWeight="bold">
-                12:00 - Aperitivo
-              </Typography>
-              <Typography variant="body2" color="text.secondary">Presso la Locanda dei Sposini - Giardino Esterno</Typography>
-            </TimelineContent>
-          </TimelineItem>
-
-          {/* Event 3: Pranzo */}
-          <TimelineItem>
-            <TimelineSeparator>
-              <TimelineConnector />
-              <TimelineDot sx={{ backgroundColor: '#FFC0CB' }}>
-                <RestaurantIcon />
-              </TimelineDot>
-              <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent sx={{ py: '12px', px: 2 }}>
-              <Typography variant="body1" component="span" fontWeight="bold">
-                13:00 - Pranzo Nuziale
-              </Typography>
-              <Typography variant="body2" color="text.secondary">Presso la Locanda dei Sposini - Sala Principale</Typography>
-            </TimelineContent>
-          </TimelineItem>
-
-          {/* Event 4: After Party */}
-          <TimelineItem>
-            <TimelineSeparator>
-              <TimelineConnector />
-              <TimelineDot sx={{ backgroundColor: '#FFC0CB' }}>
-                <CelebrationIcon />
-              </TimelineDot>
-              <TimelineConnector sx={{ minHeight: {xs: 50, sm: 70} }}/>
-            </TimelineSeparator>
-            <TimelineContent sx={{ py: '12px', px: 2 }}>
-              <Typography variant="body1" component="span" fontWeight="bold">
-                17:00 - Taglio della Torta & After Party
-              </Typography>
-              <Typography variant="body2" color="text.secondary">Presso la Locanda dei Sposini - Area Lounge</Typography>
-            </TimelineContent>
-          </TimelineItem>
-        </Timeline>
+        <List sx={{ width: '100%', bgcolor: 'background.paper', borderRadius: '8px', boxShadow: 1 }}>
+          {events.map((event, index) => (
+            <React.Fragment key={event.title}>
+              <ListItem alignItems="flex-start" sx={{ py: { xs: 1.5, sm: 2 } }}>
+                <ListItemIcon sx={{ mt: 0.5, color: 'primary.main', minWidth: 40 }}> {/* Adjusted minWidth */}
+                  {event.icon}
+                </ListItemIcon>
+                <ListItemText
+                  primary={`${event.time} - ${event.title}`}
+                  secondary={event.description}
+                  primaryTypographyProps={{ fontWeight: 'bold', variant: 'body1' }}
+                  secondaryTypographyProps={{ variant: 'body2', color: 'text.secondary' }}
+                />
+              </ListItem>
+              {index < events.length - 1 && <Divider component="li" variant="middle" />} {/* Added variant="middle" */}
+            </React.Fragment>
+          ))}
+        </List>
       </Container>
     </Box>
   );
