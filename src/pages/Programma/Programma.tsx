@@ -59,6 +59,14 @@ const ProgrammaPage: React.FC = () => {
   };
   const galleryCols = getGalleryCols();
 
+  // Define the events data for the List
+  const events = [
+    { time: "10:00", title: "Cerimonia", description: "Presso la Chiesa di San Giovanni", icon: <ChurchIcon /> },
+    { time: "12:00", title: "Aperitivo", description: "Presso la Locanda dei Sposini - Giardino Esterno", icon: <LocalBarIcon /> },
+    { time: "13:00", title: "Pranzo Nuziale", description: "Presso la Locanda dei Sposini - Sala Principale", icon: <RestaurantIcon /> },
+    { time: "17:00", title: "Taglio della Torta & After Party", description: "Presso la Locanda dei Sposini - Area Lounge", icon: <CelebrationIcon /> },
+  ];
+
   // AppBar height is assumed to be 64px.
   const appBarHeight = '64px';
   // Calculate 100% of viewport height minus the AppBar's height
