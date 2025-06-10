@@ -153,6 +153,36 @@ const HomePage: React.FC = () => {
         <Gallery images={itemData} enableRandomCols={true} />
       </Container>
 
+      {/* Lista Nozze Section */}
+      <Container maxWidth="md" sx={{ py: { xs: 4, sm: 6, md: 8 } }}>
+        <Typography variant="h4" component="h2" textAlign="center" sx={{ mb: { xs: 3, sm: 4, md: 6 } }}>
+          LISTA NOZZE
+        </Typography>
+        <Typography variant="body1" textAlign="center" sx={{ mb: 2 }}>
+          Ciò che conta davvero è festeggiare la nostra unione con le persone che amiamo.
+        </Typography>
+        <Typography variant="body1" textAlign="center" sx={{ mb: 3 }}>
+          Se volete contribuire a rendere magico il nostro matrimonio potete farlo così:
+        </Typography>
+        <Box sx={{ textAlign: 'center', mt: 3 }}> {/* Added Box for centering IBAN details */}
+          <Typography variant="h6" component="p" sx={{ fontWeight: 'medium' }}>
+            IBAN
+          </Typography>
+          <Typography variant="body1" sx={{ mb: 1 }}>
+            IT19E08800000000000000083919
+          </Typography>
+          <Typography variant="h6" component="p" sx={{ fontWeight: 'medium', mt: 2 }}>
+            INTESTATO A
+          </Typography>
+          <Typography variant="body1">
+            Beatrice Bergamo
+          </Typography>
+          <Typography variant="body1" sx={{ mb: 3 }}>
+            Enrico Gallo
+          </Typography>
+        </Box>
+      </Container>
+
       {/* Registration CTA Section */}
       <Container maxWidth="md" sx={{ py: { xs: 4, sm: 6, md: 8 }, display: 'flex', justifyContent: 'center' }}>
         <Card sx={{ minWidth: 275, maxWidth: { xs: '100%', sm: 500 }, width: '100%', boxShadow: 3 }}> {/* Added boxShadow for better visibility */}
