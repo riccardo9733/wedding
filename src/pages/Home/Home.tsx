@@ -15,36 +15,28 @@ const HomePage: React.FC = () => {
 
   const itemData = [
     {
-      img: 'https://images.pexels.com/photos/158028/baskets-sale-marketplace-shops-158028.jpeg?auto=compress&cs=tinysrgb&w=800',
-      title: 'Portrait Basket',
-    },
+      img: 'https://images.pexels.com/photos/9584933/pexels-photo-9584933.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      title: '',
+    },    
     {
-      img: 'https://images.pexels.com/photos/2478248/pexels-photo-2478248.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      title: 'Wide Landscape Mountains',
-    },
-    {
-      img: 'https://images.pexels.com/photos/269948/pexels-photo-269948.jpeg?auto=compress&cs=tinysrgb&w=800',
-      title: 'Square-ish Food',
-    },
-    {
-      img: 'https://images.pexels.com/photos/326900/pexels-photo-326900.jpeg?auto=compress&cs=tinysrgb&w=800',
+      img: 'https://images.pexels.com/photos/4759900/pexels-photo-4759900.jpeg?auto=compress&cs=tinysrgb&w=1200',
       title: 'Very Tall Plant',
     },
     {
-      img: 'https://images.pexels.com/photos/1591373/pexels-photo-1591373.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      title: 'Panorama Beach',
+      img: 'https://images.pexels.com/photos/7509772/pexels-photo-7509772.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      title: ' ',
     },
     {
-      img: 'https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      title: 'Standard Landscape Aurora',
+      img: 'https://images.pexels.com/photos/2725458/pexels-photo-2725458.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      title: '',
     },
     {
-      img: 'https://images.pexels.com/photos/1036627/pexels-photo-1036627.jpeg?auto=compress&cs=tinysrgb&w=800',
-      title: 'Another Portrait Woman',
+      img: 'https://images.pexels.com/photos/612936/pexels-photo-612936.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      title: '',
     },
     {
-      img: 'https://images.pexels.com/photos/2486168/pexels-photo-2486168.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      title: 'Wider Landscape Abstract',
+      img: 'https://images.pexels.com/photos/4247817/pexels-photo-4247817.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      title: '',
     },
   ];
 
@@ -61,7 +53,7 @@ const HomePage: React.FC = () => {
         }}
       >
         <img
-          src="https://images.pexels.com/photos/32392446/pexels-photo-32392446/free-photo-of-elegante-bacio-nuziale-in-bianco-e-nero.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+          src="https://static.wixstatic.com/media/dd0004_98beaa2da8a647f084359cd125186f9a~mv2.jpg/v1/fill/w_1920,h_1944,al_b,q_90,enc_avif,quality_auto/dd0004_98beaa2da8a647f084359cd125186f9a~mv2.jpg"
           alt="Beatrice e Enrico - Un elegante bacio nuziale in bianco e nero"
           style={{
             width: '100%',

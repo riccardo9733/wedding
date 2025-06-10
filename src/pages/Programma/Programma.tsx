@@ -21,20 +21,28 @@ const ProgrammaPage: React.FC = () => {
   // Data for the new gallery
   const galleryItemData = [
     {
-      img: 'https://images.pexels.com/photos/158028/baskets-sale-marketplace-shops-158028.jpeg?auto=compress&cs=tinysrgb&w=800',
-      title: 'Portrait Basket',
-    },
+      img: 'https://www.villacanal.it/wp-content/uploads/2024/09/Fotostudio4a-768x960.jpg',
+      title: '',
+    },    
     {
-      img: 'https://images.pexels.com/photos/2478248/pexels-photo-2478248.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      title: 'Wide Landscape Mountains',
-    },
-    {
-      img: 'https://images.pexels.com/photos/269948/pexels-photo-269948.jpeg?auto=compress&cs=tinysrgb&w=800',
-      title: 'Square-ish Food',
-    },
-    {
-      img: 'https://images.pexels.com/photos/326900/pexels-photo-326900.jpeg?auto=compress&cs=tinysrgb&w=800',
+      img: 'https://www.villacanal.it/wp-content/uploads/2024/09/Ottica-Martano2.jpg',
       title: 'Very Tall Plant',
+    },
+    {
+      img: 'https://www.villacanal.it/wp-content/uploads/2020/01/43_villacanal-768x480.jpg',
+      title: ' ',
+    },
+    {
+      img: 'https://www.villacanal.it/wp-content/uploads/2020/01/21_villacanal_giardino-768x480.jpg',
+      title: '',
+    },
+    {
+      img: 'https://www.villacanal.it/wp-content/uploads/2020/01/2_villacanal.JPG.jpg',
+      title: '',
+    },
+    {
+      img: 'https://www.villacanal.it/wp-content/uploads/2024/09/Greta-Bellucci-683x1024.jpg',
+      title: '',
     },
   ];
 
@@ -64,7 +72,7 @@ const ProgrammaPage: React.FC = () => {
         }}
       >
         <img
-          src="https://images.pexels.com/photos/16192782/pexels-photo-16192782/free-photo-of-elegant-bride-and-groom-posing-together-in-orchard.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+          src="https://www.villacanal.it/wp-content/uploads/2020/01/2_villacanal.JPG.jpg"
           alt="Elegant bride and groom posing in an orchard"
           style={{
             width: '100%',
@@ -144,7 +152,7 @@ const ProgrammaPage: React.FC = () => {
         <Typography variant="h4" component="h2" textAlign="center" sx={{ mb: { xs: 2, sm: 4 } }}> {/* Adjusted margin bottom */}
           Scopri di Più sulla Location
         </Typography>
-        <Gallery images={galleryItemData} />
+        <Gallery images={galleryItemData} enableRandomCols={true} />
       </Container>
 
       {/* Timeline section will be added below here */}
