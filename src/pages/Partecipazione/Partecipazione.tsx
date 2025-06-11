@@ -145,7 +145,21 @@ const PartecipazionePage: React.FC = () => {
                   }}
                 />
               </Stack>
-              <FormControl component="fieldset" error={!!errors.partecipera} sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
+              <FormControl
+                component="fieldset"
+                error={!!errors.partecipera}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  '&:focus-within': {
+                    '& .MuiFormLabel-root': {
+                      color: '#6A9C89',
+                    },
+                  },
+                }}
+              >
                 <FormLabel component="legend">Parteciperò / Parteciperemo</FormLabel>
                 <Controller
                   name="partecipera"
