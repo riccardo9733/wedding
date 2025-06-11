@@ -9,7 +9,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import HomePage from './pages/Home/Home';
 import ProgrammaPage from './pages/Programma/Programma';
-import IscrizionePage from './pages/Iscrizione/Iscrizione';
+import PartecipazionePage from './pages/Partecipazione/Partecipazione';
 
 const App: React.FC = () => {
   return (
@@ -22,7 +22,7 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/programma" element={<ProgrammaPage />} />
-              <Route path="/iscrizione" element={<IscrizionePage />} />
+              <Route path="/partecipazione" element={<PartecipazionePage />} />
             </Routes>
           </Box>
           <Footer />

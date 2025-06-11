@@ -24,7 +24,7 @@ const Header: React.FC = () => {
   const menuItems = [
     { text: 'Home', path: '/' },
     { text: 'Programma', path: '/programma' },
-    { text: 'Iscrizione', path: '/iscrizione' },
+    { text: 'Partecipazione', path: '/partecipazione' },
   ];
 
   const desktopMenu = (
