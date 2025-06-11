@@ -145,7 +145,21 @@ const PartecipazionePage: React.FC = () => {
                   }}
                 />
               </Stack>
-              <FormControl component="fieldset" error={!!errors.partecipera} sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
+              <FormControl
+                component="fieldset"
+                error={!!errors.partecipera}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  '&:focus-within': {
+                    '& .MuiFormLabel-root': {
+                      color: '#6A9C89',
+                    },
+                  },
+                }}
+              >
                 <FormLabel component="legend">Parteciperò / Parteciperemo</FormLabel>
                 <Controller
                   name="partecipera"
@@ -157,8 +171,24 @@ const PartecipazionePage: React.FC = () => {
                         aria-label="partecipera"
                         {...field}
                       >
-                        <FormControlLabel value="si" control={<Radio />} label="Sì" />
-                        <FormControlLabel value="no" control={<Radio />} label="No" />
+                        <FormControlLabel value="si" control={<Radio sx={{
+                          '&.Mui-focusVisible': {
+                            outline: '2px solid #6A9C89', // Or use a boxShadow for a softer glow
+                            outlineOffset: '2px',
+                          },
+                          '&.Mui-checked': { // Optional: if you want to change checked color too
+                            color: '#6A9C89',
+                          }
+                        }} />} label="Sì" />
+                        <FormControlLabel value="no" control={<Radio sx={{
+                          '&.Mui-focusVisible': {
+                            outline: '2px solid #6A9C89',
+                            outlineOffset: '2px',
+                          },
+                          '&.Mui-checked': { // Optional: if you want to change checked color too
+                            color: '#6A9C89',
+                          }
+                        }} />} label="No" />
                       </RadioGroup>
                     )}
                   />
