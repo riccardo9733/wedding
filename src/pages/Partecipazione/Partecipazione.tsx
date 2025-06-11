@@ -101,7 +101,20 @@ const PartecipazionePage: React.FC = () => {
                   {...register('nome', { required: 'Nome è obbligatorio' })}
                   error={!!errors.nome}
                   helperText={errors.nome?.message}
-                  sx={{ flexGrow: 1 }}
+                  sx={{
+                    flexGrow: 1,
+                    '& .MuiOutlinedInput-root': {
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#eec0c8',
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#eec0c8',
+                      },
+                    },
+                    '& label.Mui-focused': {
+                      color: '#eec0c8',
+                    },
+                  }}
                 />
                 <TextField
                   fullWidth
@@ -110,7 +123,20 @@ const PartecipazionePage: React.FC = () => {
                   {...register('cognome', { required: 'Cognome è obbligatorio' })}
                   error={!!errors.cognome}
                   helperText={errors.cognome?.message}
-                  sx={{ flexGrow: 1 }}
+                  sx={{
+                    flexGrow: 1,
+                    '& .MuiOutlinedInput-root': {
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#eec0c8',
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#eec0c8',
+                      },
+                    },
+                    '& label.Mui-focused': {
+                      color: '#eec0c8',
+                    },
+                  }}
                 />
               </Stack>
               <FormControl component="fieldset" error={!!errors.partecipera} sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
@@ -146,6 +172,19 @@ const PartecipazionePage: React.FC = () => {
                   error={!!errors.quantita}
                   helperText={errors.quantita?.message}
                   disabled={watchPartecipera !== 'si'}
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#eec0c8',
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#eec0c8',
+                      },
+                    },
+                    '& label.Mui-focused': {
+                      color: '#eec0c8',
+                    },
+                  }}
                 />
               <TextField
                 fullWidth
@@ -156,6 +195,19 @@ const PartecipazionePage: React.FC = () => {
                 {...register('richiesteSpeciali')}
                 error={!!errors.richiesteSpeciali}
                 helperText={errors.richiesteSpeciali?.message}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#eec0c8',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#eec0c8',
+                    },
+                  },
+                  '& label.Mui-focused': {
+                    color: '#eec0c8',
+                  },
+                }}
               />
               <Button
                 type="submit"
