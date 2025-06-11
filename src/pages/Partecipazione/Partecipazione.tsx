@@ -15,14 +15,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from 'react';
 import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
-
-interface IFormInput {
-  nome: string;
-  cognome: string;
-  partecipera: 'si' | 'no' | '';
-  quantita: number | '';
-  richiesteSpeciali?: string;
-}
+import useTelegram, { type IFormInput } from '../../hooks/useTelegram';
 
 const PartecipazionePage: React.FC = () => {
   const {
@@ -47,6 +40,7 @@ const PartecipazionePage: React.FC = () => {
   const [message, setMessage] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarSeverity, setSnackbarSeverity] = useState<'success' | 'error'>('success');
+  const { sendMessage, isLoading, error: telegramError } = useTelegram(); // Use `error` from hook
 
   const watchPartecipera = watch('partecipera');
 
@@ -56,8 +50,7 @@ const PartecipazionePage: React.FC = () => {
     }
   }, [watchPartecipera, setValue]);
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    // Submission logic
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     console.log('Nome:', data.nome);
     console.log('Cognome:', data.cognome);
     console.log('Parteciperà:', data.partecipera);
@@ -66,9 +59,20 @@ const PartecipazionePage: React.FC = () => {
     }
     console.log('Richieste Speciali:', data.richiesteSpeciali);
 
+    const success = await sendMessage(data); // Call hook's sendMessage
+
     const guestText = data.partecipera === 'si' ? `${data.quantita} ospiti` : 'non parteciperà';
-    setMessage(`Grazie ${data.nome} ${data.cognome}, la tua conferma (${guestText}) è stata inviata! Richieste speciali: "${data.richiesteSpeciali || 'Nessuna'}". (Simulazione)`);
-    setSnackbarSeverity('success');
+
+    if (success) {
+      setMessage(`Grazie ${data.nome} ${data.cognome}, la tua conferma (${guestText}) è stata inviata! Richieste speciali: "${data.richiesteSpeciali || 'Nessuna'}".`);
+      setSnackbarSeverity('success');
+    } else {
+      // Optionally use telegramError from the hook if it's user-friendly
+      // For now, using a generic message as requested.
+      setMessage(telegramError || `Si è verificato un errore durante l'invio della tua partecipazione. Riprova più tardi.`);
+      setSnackbarSeverity('error');
+    }
+
     setOpenSnackbar(true);
     reset(); // Reset form using react-hook-form's reset
   };
@@ -248,19 +252,19 @@ const PartecipazionePage: React.FC = () => {
               <Button
                 type="submit"
                 variant="outlined"
-                // color="primary" // Overridden by sx
                 size="large"
                 fullWidth
+                disabled={isLoading} // Disable button when loading
                 sx={{
                   borderColor: '#6A9C89',
                   color: '#000',
                   '&:hover': {
                     backgroundColor: '#6A9C89',
                   },
-                  mt: 2, // Added margin top for spacing from the field above
+                  mt: 2,
                 }}
               >
-                Invia Partecipazione
+                {isLoading ? 'Invio in corso...' : 'Invia Partecipazione'}
               </Button>
             </Stack>
           </Box>
