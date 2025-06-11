@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Radio from '@mui/material/Radio';
@@ -15,59 +16,61 @@ import FormLabel from '@mui/material/FormLabel';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 
+interface IFormInput {
+  nome: string;
+  cognome: string;
+  partecipera: 'si' | 'no' | '';
+  quantita: number | '';
+  richiesteSpeciali?: string;
+}
+
 const PartecipazionePage: React.FC = () => {
-  const [name, setName] = useState('');
-  const [cognome, setCognome] = useState('');
-  const [partecipera, setPartecipera] = useState('');
-  const [quantita, setQuantita] = useState<number | ''>('');
-  const [richiesteSpeciali, setRichiesteSpeciali] = useState('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+    watch,
+    setValue,
+    reset,
+  } = useForm<IFormInput>({
+    mode: 'onTouched',
+    defaultValues: {
+      nome: '',
+      cognome: '',
+      partecipera: '',
+      quantita: '',
+      richiesteSpeciali: '',
+    },
+  });
+
   const [message, setMessage] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarSeverity, setSnackbarSeverity] = useState<'success' | 'error'>('success');
 
-  const handleParteciperaChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setPartecipera(value);
-    if (value === 'no') {
-      setQuantita(''); // Clear quantity if not attending
-    }
-  };
+  const watchPartecipera = watch('partecipera');
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // Validation
-    if (!name.trim() || !cognome.trim() || !partecipera) {
-      setMessage('Per favore, compila tutti i campi obbligatori (Nome, Cognome, Parteciperò/Parteciperemo).');
-      setSnackbarSeverity('error');
-      setOpenSnackbar(true);
-      return;
+  useEffect(() => {
+    if (watchPartecipera === 'no') {
+      setValue('quantita', '', { shouldValidate: false });
     }
+  }, [watchPartecipera, setValue]);
 
-    if (partecipera === 'si' && (quantita === '' || quantita < 1)) {
-      setMessage('Per favore, indica il numero di ospiti se partecipi.');
-      setSnackbarSeverity('error');
-      setOpenSnackbar(true);
-      return;
-    }
-
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
     // Submission logic
-    console.log('Nome:', name);
-    console.log('Cognome:', cognome);
-    console.log('Parteciperà:', partecipera);
-    if (partecipera === 'si') {
-      console.log('Quantità:', quantita);
+    console.log('Nome:', data.nome);
+    console.log('Cognome:', data.cognome);
+    console.log('Parteciperà:', data.partecipera);
+    if (data.partecipera === 'si') {
+      console.log('Quantità:', data.quantita);
     }
-    console.log('Richieste Speciali:', richiesteSpeciali);
+    console.log('Richieste Speciali:', data.richiesteSpeciali);
 
-    const guestText = partecipera === 'si' ? `${quantita} ospiti` : 'non parteciperà';
-    setMessage(`Grazie ${name} ${cognome}, la tua conferma (${guestText}) è stata inviata! Richieste speciali: "${richiesteSpeciali || 'Nessuna'}". (Simulazione)`);
+    const guestText = data.partecipera === 'si' ? `${data.quantita} ospiti` : 'non parteciperà';
+    setMessage(`Grazie ${data.nome} ${data.cognome}, la tua conferma (${guestText}) è stata inviata! Richieste speciali: "${data.richiesteSpeciali || 'Nessuna'}". (Simulazione)`);
     setSnackbarSeverity('success');
     setOpenSnackbar(true);
-    setName('');
-    setCognome('');
-    setPartecipera('');
-    setQuantita('');
-    setRichiesteSpeciali('');
+    reset(); // Reset form using react-hook-form's reset
   };
 
   const handleCloseSnackbar = (event?: React.SyntheticEvent | Event, reason?: string) => {
@@ -87,81 +90,84 @@ const PartecipazionePage: React.FC = () => {
       </Typography>
       <Card sx={{ maxWidth: 600, margin: 'auto', mt: 4 }}>
         <CardContent>
-          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 0 }}> {/* Adjusted mt for form inside card */}
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+          <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 0 }}>
+            <Stack spacing={3} sx={{ alignItems: 'stretch' }}>
+              <Stack direction="row" spacing={2} sx={{ width: '100%' }}>
                 <TextField
-              fullWidth
-              label="Nome"
-              variant="outlined"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="Cognome"
-              variant="outlined"
-              value={cognome}
-              onChange={(e) => setCognome(e.target.value)}
-              required
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <FormControl component="fieldset" required sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', mt: 2 }}>
-              <FormLabel component="legend">Parteciperò / Parteciperemo</FormLabel>
-              <RadioGroup
-                row
-                aria-label="partecipera"
-                name="partecipera"
-                value={partecipera}
-                onChange={handleParteciperaChange}
+                  fullWidth
+                  label="Nome"
+                  variant="outlined"
+                  {...register('nome', { required: 'Nome è obbligatorio' })}
+                  error={!!errors.nome}
+                  helperText={errors.nome?.message}
+                  sx={{ flexGrow: 1 }}
+                />
+                <TextField
+                  fullWidth
+                  label="Cognome"
+                  variant="outlined"
+                  {...register('cognome', { required: 'Cognome è obbligatorio' })}
+                  error={!!errors.cognome}
+                  helperText={errors.cognome?.message}
+                  sx={{ flexGrow: 1 }}
+                />
+              </Stack>
+              <FormControl component="fieldset" error={!!errors.partecipera} sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
+                <FormLabel component="legend">Parteciperò / Parteciperemo</FormLabel>
+                <Controller
+                  name="partecipera"
+                    control={control}
+                    rules={{ required: 'Selezionare una risposta è obbligatorio' }}
+                    render={({ field }) => (
+                      <RadioGroup
+                        row
+                        aria-label="partecipera"
+                        {...field}
+                      >
+                        <FormControlLabel value="si" control={<Radio />} label="Sì" />
+                        <FormControlLabel value="no" control={<Radio />} label="No" />
+                      </RadioGroup>
+                    )}
+                  />
+                  {errors.partecipera && <Typography color="error" variant="caption" sx={{ display: 'block', textAlign: 'center', mt:0.5 }}>{errors.partecipera.message}</Typography>}
+                </FormControl>
+              <TextField
+                fullWidth
+                label="Quanti sarete?"
+                  type="number"
+                  variant="outlined"
+                  {...register('quantita', {
+                    required: watchPartecipera === 'si' ? 'Specificare quanti sarete è obbligatorio' : false,
+                    min: watchPartecipera === 'si' ? { value: 1, message: 'Devi essere almeno 1' } : undefined,
+                    setValueAs: (value) => (value === '' ? '' : parseInt(value, 10)), // Ensure empty string or number
+                  })}
+                  InputProps={{ inputProps: { min: 1 } }}
+                  error={!!errors.quantita}
+                  helperText={errors.quantita?.message}
+                  disabled={watchPartecipera !== 'si'}
+                />
+              <TextField
+                fullWidth
+                label="Allergie? Richieste menu vegano o vegetariano?"
+                variant="outlined"
+                multiline
+                rows={3}
+                {...register('richiesteSpeciali')}
+                error={!!errors.richiesteSpeciali}
+                helperText={errors.richiesteSpeciali?.message}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                size="large"
+                sx={{ alignSelf: 'center' }}
               >
-                <FormControlLabel value="si" control={<Radio />} label="Sì" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-              </RadioGroup>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Quanti sarete?"
-              type="number"
-              variant="outlined"
-              value={quantita}
-              onChange={(e) => setQuantita(e.target.value === '' ? '' : parseInt(e.target.value, 10))}
-              InputProps={{ inputProps: { min: 1 } }}
-              required={partecipera === 'si'}
-              disabled={partecipera !== 'si'}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Allergie? Richieste menu vegano o vegetariano?"
-              variant="outlined"
-              multiline
-              rows={3}
-              value={richiesteSpeciali}
-              onChange={(e) => setRichiesteSpeciali(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              fullWidth
-              size="large"
-            >
-              Invia Partecipazione
-            </Button>
-          </Grid>
-        </Grid>
-      </Box>
-    </CardContent>
+                Invia Partecipazione
+              </Button>
+            </Stack>
+          </Box>
+        </CardContent>
   </Card>
       <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
         <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
