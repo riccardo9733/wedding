@@ -8,6 +8,7 @@ import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import Gallery from '../../components/Gallery';
+import { darken } from '@mui/material';
 
 const HomePage: React.FC = () => {
   const appBarHeight = '64px';
@@ -41,7 +42,7 @@ const HomePage: React.FC = () => {
   ];
 
   return (
-    <Box component="article"> {/* Using article for semantic grouping of the page content */}
+    <Box component="article"  sx={{backgroundColor: '#FFF5E4'}}> {/* Using article for semantic grouping of the page content */}
       {/* Hero Section */}
       <Box
         sx={{
@@ -184,8 +185,8 @@ const HomePage: React.FC = () => {
       </Container>
 
       {/* Registration CTA Section */}
-      <Container maxWidth="md" sx={{ py: { xs: 4, sm: 6, md: 8 }, display: 'flex', justifyContent: 'center' }}>
-        <Card sx={{ minWidth: 275, maxWidth: { xs: '100%', sm: 500 }, width: '100%', boxShadow: 3 }}> {/* Added boxShadow for better visibility */}
+      <Container maxWidth="md" sx={{ py: { xs: 4, sm: 6, md: 8 }, display: 'flex', justifyContent: 'center'}}>
+        <Card sx={{ minWidth: 275, maxWidth: { xs: '100%', sm: 500 }, width: '100%', boxShadow: 3,  bgcolor: '#FFF4E4' }}> {/* Added boxShadow for better visibility */}
           <CardContent sx={{ textAlign: 'center', px: { xs: 2, sm: 3 }, py: { xs: 3, sm: 4} }}>
             <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 'medium' }}>
               Pronto a Festeggiare con Noi?
@@ -196,12 +197,16 @@ const HomePage: React.FC = () => {
           </CardContent>
           <CardActions sx={{ justifyContent: 'center', pt: 0, pb: { xs: 2, sm: 3 } }}> {/* Adjusted padding */}
             <Button
-              variant="contained"
-              color="primary"
+              variant="outlined"
+              sx={{
+                  borderColor: '#FFA725',
+                  color: '#000',
+                  '&:hover': {
+                    backgroundColor: '#FFA725',
+                  },minWidth: '200px'}}
               component={Link}
-              to="/iscrizione"
+              to="/partecipazione"
               size="large"
-              sx={{ minWidth: '200px' }} // Ensure button is a good size
             >
               Conferma Presenza
             </Button>

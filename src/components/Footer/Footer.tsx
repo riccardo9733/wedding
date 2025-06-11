@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { darken, lighten } from '@mui/material';
 
 const Footer: React.FC = () => {
   return (
@@ -11,10 +12,7 @@ const Footer: React.FC = () => {
         py: 3,
         px: 2,
         mt: 'auto',
-        backgroundColor: (theme) =>
-          theme.palette.mode === 'light'
-            ? theme.palette.grey[200]
-            : theme.palette.grey[800],
+        backgroundColor: lighten('#FFF4E4', 0.3),
         textAlign: 'center',
       }}
     >

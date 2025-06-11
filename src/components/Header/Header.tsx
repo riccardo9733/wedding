@@ -10,7 +10,7 @@ import Drawer from '@mui/material/Drawer';
 import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+import { lighten, useTheme } from '@mui/material/styles';
 
 const Header: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -79,7 +79,7 @@ const Header: React.FC = () => {
   );
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{backgroundColor: lighten('#FFF4E4', 0.3)}}>
       <Toolbar sx={{ justifyContent: 'space-between' }}>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <RouterLink to="/" style={{ textDecoration: 'none', color: 'inherit' }}>

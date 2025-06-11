@@ -48,19 +48,19 @@ const ProgrammaPage: React.FC = () => {
 
   // Define the events data for the List
   const events = [
-    { time: "10:00", title: "Cerimonia", description: "Presso la Chiesa di San Giovanni", icon: <ChurchIcon /> },
-    { time: "12:00", title: "Aperitivo", description: "Presso la Locanda dei Sposini - Giardino Esterno", icon: <LocalBarIcon /> },
-    { time: "13:00", title: "Pranzo Nuziale", description: "Presso la Locanda dei Sposini - Sala Principale", icon: <RestaurantIcon /> },
-    { time: "17:00", title: "Taglio della Torta & After Party", description: "Presso la Locanda dei Sposini - Area Lounge", icon: <CelebrationIcon /> },
+    { time: "10:00", title: "Cerimonia", description: "Presso la Chiesa di San Giovanni", icon: <ChurchIcon sx={{color:'#FFA725'}} /> },
+    { time: "12:00", title: "Aperitivo", description: "Presso la Locanda dei Sposini - Giardino Esterno", icon: <LocalBarIcon sx={{color:'#FFA725'}}  /> },
+    { time: "13:00", title: "Pranzo Nuziale", description: "Presso la Locanda dei Sposini - Sala Principale", icon: <RestaurantIcon sx={{color:'#FFA725'}} /> },
+    { time: "17:00", title: "Taglio della Torta & After Party", description: "Presso la Locanda dei Sposini - Area Lounge", icon: <CelebrationIcon sx={{color:'#FFA725'}} /> },
   ];
 
   // AppBar height is assumed to be 64px.
   const appBarHeight = '64px';
   // Calculate 100% of viewport height minus the AppBar's height
-  const heroHeight = `calc(100vh - ${appBarHeight})`;
+  const heroHeight = `calc(90vh - ${appBarHeight})`;
 
   return (
-    <Box component="article"> {/* Main page container, using article for semantics */}
+    <Box component="article" sx={{backgroundColor: '#FFF5E4'}}> {/* Main page container, using article for semantics */}
       {/* Hero Section */}
       <Box
         sx={{
@@ -137,30 +137,12 @@ const ProgrammaPage: React.FC = () => {
         </Box>
       </Box>
 
-      {/* Location Information Section */}
-      <Container maxWidth="md" sx={{ pt: { xs: 4, sm: 5, md: 6 }, pb: { xs: 2, sm: 3, md: 4 } }}>
-        <Typography variant="h4" component="h2" textAlign="center" sx={{ mb: { xs: 2, sm: 3 } }}>
-          La Nostra Location Speciale
-        </Typography>
-        <Typography variant="body1" color="text.secondary" textAlign="left" sx={{ lineHeight: 1.75, textIndent: '1.5em' /* Optional: for a slight indent */ }}>
-          Descrizione dettagliata della splendida location che ospiterà il nostro giorno speciale. Immersa nel verde, con panorami mozzafiato e angoli romantici, è il luogo perfetto per celebrare il nostro amore e creare ricordi indimenticabili con voi.
-        </Typography>
-      </Container>
-
-      {/* Location Mini-Gallery Section */}
-      <Container maxWidth="lg" sx={{ pt: { xs: 2, sm: 3, md: 4 }, pb: { xs: 3, sm: 4, md: 6 } }}>
-        <Typography variant="h4" component="h2" textAlign="center" sx={{ mb: { xs: 2, sm: 4 } }}> {/* Adjusted margin bottom */}
-          Scopri di Più sulla Location
-        </Typography>
-        <Gallery images={galleryItemData} enableRandomCols={true} />
-      </Container>
-
       {/* Timeline section will be added below here */}
       <Container maxWidth="md" sx={{ pt: { xs: 2, sm: 3, md: 4 }, pb: { xs: 4, sm: 6, md: 8 } }}>
-        <Typography variant="h4" component="h2" textAlign="center" sx={{ mb: { xs: 4, sm: 6 } }}>
+        <Typography variant="h4" component="h2" textAlign="center"  sx={{ mb: { xs: 4, sm: 6 } }}>
           Il Programma della Giornata
         </Typography>
-        <List sx={{ width: '100%', bgcolor: 'background.paper', borderRadius: '8px', boxShadow: 1 }}>
+        <List sx={{ width: '100%',  borderRadius: '8px', boxShadow: 1 }}>
           {events.map((event, index) => (
             <React.Fragment key={event.title}>
               <ListItem alignItems="flex-start" sx={{ py: { xs: 1.5, sm: 2 } }}>
@@ -179,6 +161,24 @@ const ProgrammaPage: React.FC = () => {
           ))}
         </List>
       </Container>
+
+      {/* Location Information Section */}
+      <Container maxWidth="md" sx={{ pt: { xs: 4, sm: 5, md: 6 }, pb: { xs: 2, sm: 3, md: 4 } }}>
+        <Typography variant="h4" component="h2" textAlign="center"  sx={{ mb: { xs: 2, sm: 3 } }}>
+          La Nostra Location Speciale
+        </Typography>
+        <Typography variant="body1" color="text.secondary" textAlign="left" sx={{ lineHeight: 1.75, textIndent: '1.5em' /* Optional: for a slight indent */ }}>
+          Descrizione dettagliata della splendida location che ospiterà il nostro giorno speciale. Immersa nel verde, con panorami mozzafiato e angoli romantici, è il luogo perfetto per celebrare il nostro amore e creare ricordi indimenticabili con voi.
+        </Typography>
+      </Container>
+
+      {/* Location Mini-Gallery Section */}
+      <Container maxWidth="lg" sx={{ pt: { xs: 2, sm: 3, md: 4 }, pb: { xs: 3, sm: 4, md: 6 } }}>
+      
+        <Gallery images={galleryItemData} enableRandomCols={true} />
+      </Container>
+
+      
     </Box>
   );
 };

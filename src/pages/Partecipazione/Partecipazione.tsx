@@ -81,15 +81,21 @@ const PartecipazionePage: React.FC = () => {
     setOpenSnackbar(false);
   };
 
+  const appBarHeight = '64px';
+
+  const heroHeight = `calc(90vh - ${appBarHeight})`;
+
   return (
-    <Container maxWidth={false} sx={{ mt: 4, mb: 4 }}>
+    <Container maxWidth={false}  sx={{ pt: 4, pb: 4, backgroundColor: '#FFF5E4' }} >
+      <Box sx={{height: heroHeight}}>
+
       <Typography variant="h3" component="h1" gutterBottom align="center">
         Partecipazione
       </Typography>
       <Typography variant="body1" component="p" gutterBottom align="center">
         Per favore, compila il modulo sottostante per farci sapere se parteciperai e per fornirci i dettagli necessari.
       </Typography>
-      <Card sx={{ maxWidth: 600, margin: 'auto', mt: 4 }}>
+      <Card sx={{ maxWidth: 600, margin: 'auto', mt: 4 , backgroundColor: '#FFF5E4' }}>
         <CardContent>
           <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 0 }}>
             <Stack spacing={3} sx={{ alignItems: 'stretch' }}>
@@ -105,14 +111,14 @@ const PartecipazionePage: React.FC = () => {
                     flexGrow: 1,
                     '& .MuiOutlinedInput-root': {
                       '&.Mui-focused fieldset': {
-                        borderColor: '#eec0c8',
+                        borderColor: '#FFA725',
                       },
                       '&:hover fieldset': {
-                        borderColor: '#eec0c8',
+                        borderColor: '#FFA725',
                       },
                     },
                     '& label.Mui-focused': {
-                      color: '#eec0c8',
+                      color: '#FFA725',
                     },
                   }}
                 />
@@ -127,14 +133,14 @@ const PartecipazionePage: React.FC = () => {
                     flexGrow: 1,
                     '& .MuiOutlinedInput-root': {
                       '&.Mui-focused fieldset': {
-                        borderColor: '#eec0c8',
+                        borderColor: '#FFA725',
                       },
                       '&:hover fieldset': {
-                        borderColor: '#eec0c8',
+                        borderColor: '#FFA725',
                       },
                     },
                     '& label.Mui-focused': {
-                      color: '#eec0c8',
+                      color: '#FFA725',
                     },
                   }}
                 />
@@ -175,14 +181,14 @@ const PartecipazionePage: React.FC = () => {
                   sx={{
                     '& .MuiOutlinedInput-root': {
                       '&.Mui-focused fieldset': {
-                        borderColor: '#eec0c8',
+                        borderColor: '#FFA725',
                       },
                       '&:hover fieldset': {
-                        borderColor: '#eec0c8',
+                        borderColor: '#FFA725',
                       },
                     },
                     '& label.Mui-focused': {
-                      color: '#eec0c8',
+                      color: '#FFA725',
                     },
                   }}
                 />
@@ -198,28 +204,28 @@ const PartecipazionePage: React.FC = () => {
                 sx={{
                   '& .MuiOutlinedInput-root': {
                     '&.Mui-focused fieldset': {
-                      borderColor: '#eec0c8',
+                      borderColor: '#FFA725',
                     },
                     '&:hover fieldset': {
-                      borderColor: '#eec0c8',
+                      borderColor: '#FFA725',
                     },
                   },
                   '& label.Mui-focused': {
-                    color: '#eec0c8',
+                    color: '#FFA725',
                   },
                 }}
               />
               <Button
                 type="submit"
-                variant="contained"
+                variant="outlined"
                 // color="primary" // Overridden by sx
                 size="large"
                 fullWidth
                 sx={{
-                  backgroundColor: '#eec0c8',
+                  borderColor: '#FFA725',
                   color: '#000',
                   '&:hover': {
-                    backgroundColor: darken('#eec0c8', 0.1),
+                    backgroundColor: '#FFA725',
                   },
                   mt: 2, // Added margin top for spacing from the field above
                 }}
@@ -240,6 +246,7 @@ const PartecipazionePage: React.FC = () => {
           {message}
         </Alert>
       </Snackbar>
+      </Box>
     </Container>
   );
 };
