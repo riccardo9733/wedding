@@ -12,6 +12,8 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 
 const PartecipazionePage: React.FC = () => {
   const [name, setName] = useState('');
@@ -83,10 +85,12 @@ const PartecipazionePage: React.FC = () => {
       <Typography variant="body1" component="p" gutterBottom align="center">
         Per favore, compila il modulo sottostante per farci sapere se parteciperai e per fornirci i dettagli necessari.
       </Typography>
-      <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
-            <TextField
+      <Card sx={{ maxWidth: 600, margin: 'auto', mt: 4 }}>
+        <CardContent>
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 0 }}> {/* Adjusted mt for form inside card */}
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
               fullWidth
               label="Nome"
               variant="outlined"
@@ -106,7 +110,7 @@ const PartecipazionePage: React.FC = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <FormControl component="fieldset" required>
+            <FormControl component="fieldset" required sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', mt: 2 }}>
               <FormLabel component="legend">Parteciperò / Parteciperemo</FormLabel>
               <RadioGroup
                 row
@@ -157,6 +161,8 @@ const PartecipazionePage: React.FC = () => {
           </Grid>
         </Grid>
       </Box>
+    </CardContent>
+  </Card>
       <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
         <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
           {message}
