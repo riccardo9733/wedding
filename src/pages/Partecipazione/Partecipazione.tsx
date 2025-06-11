@@ -15,6 +15,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import { darken } from '@mui/material/styles';
 
 interface IFormInput {
   nome: string;
@@ -159,9 +160,17 @@ const PartecipazionePage: React.FC = () => {
               <Button
                 type="submit"
                 variant="contained"
-                color="primary"
+                // color="primary" // Overridden by sx
                 size="large"
-                sx={{ alignSelf: 'center' }}
+                fullWidth
+                sx={{
+                  backgroundColor: '#eec0c8',
+                  color: '#000',
+                  '&:hover': {
+                    backgroundColor: darken('#eec0c8', 0.1),
+                  },
+                  mt: 2, // Added margin top for spacing from the field above
+                }}
               >
                 Invia Partecipazione
               </Button>
@@ -169,7 +178,12 @@ const PartecipazionePage: React.FC = () => {
           </Box>
         </CardContent>
   </Card>
-      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
         <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
           {message}
         </Alert>
