@@ -1,15 +1,15 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import appTheme from './theme'; // Corrected import
-import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import Header from './components/Header/Header';
 import HomePage from './pages/Home/Home';
-import ProgrammaPage from './pages/Programma/Programma';
 import PartecipazionePage from './pages/Partecipazione/Partecipazione';
+import ProgrammaPage from './pages/Programma/Programma';
+import appTheme from './theme'; // Corrected import
 
 const App: React.FC = () => {
   return (

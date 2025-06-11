@@ -1,14 +1,13 @@
-import React from 'react';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Gallery from '../../components/Gallery';
-import { darken } from '@mui/material';
 
 const HomePage: React.FC = () => {
   const appBarHeight = '64px';
@@ -86,7 +85,7 @@ const HomePage: React.FC = () => {
             component="h1"
             gutterBottom
             sx={{
-              color: '#FFFFFF',
+              color: 'rgba(193, 216, 195, 1)',
               fontWeight: 'bold', // Using 'bold' for standard bold
               textShadow: '2px 2px 6px rgba(0, 0, 0, 0.7)', // Adjusted shadow for clarity
               fontSize: { // Responsive font size
@@ -104,7 +103,7 @@ const HomePage: React.FC = () => {
             variant="h5"
             component="p"
             sx={{
-              color: '#FFFFFF',
+              color: 'rgba(193, 216, 195, 1)',
               textShadow: '1px 1px 4px rgba(0, 0, 0, 0.6)',
               fontWeight: 'normal',
             }}
@@ -148,15 +147,15 @@ const HomePage: React.FC = () => {
 
       {/* Location Gallery Section */}
       <Container maxWidth="lg" sx={{ py: { xs: 4, sm: 6, md: 8 } }}>
-        <Typography variant="h4" component="h2" textAlign="center" sx={{ mb: { xs: 3, sm: 4, md: 6 } }}>
-          Un Assaggio della Location
-        </Typography>
+        
         <Gallery images={itemData} enableRandomCols={true} />
       </Container>
 
       {/* Lista Nozze Section */}
-      <Container maxWidth="md" sx={{ py: { xs: 4, sm: 6, md: 8 } }}>
-        <Typography variant="h4" component="h2" textAlign="center" sx={{ mb: { xs: 3, sm: 4, md: 6 } }}>
+      <Container maxWidth="lg" sx={{ py: { xs: 4, sm: 6, md: 8 }, display: 'flex', justifyContent: 'center'}}>
+        <Card sx={{ minWidth: 275, maxWidth: { xs: '100%', sm: 700 }, width: '100%', boxShadow: 3,  bgcolor: '#fff4e4' }}> {/* Added boxShadow for better visibility */}
+          <CardContent sx={{ textAlign: 'center', px: { xs: 2, sm: 3 }, py: { xs: 3, sm: 4} }}>
+            <Typography variant="h4" component="h2" textAlign="center" color='#6A9C89' sx={{ mb: { xs: 3, sm: 4, md: 6 } }}>
           LISTA NOZZE
         </Typography>
         <Typography variant="body1" textAlign="center" sx={{ mb: 2 }}>
@@ -182,13 +181,17 @@ const HomePage: React.FC = () => {
             Enrico Gallo
           </Typography>
         </Box>
+          </CardContent>
+          
+        </Card>
+        
       </Container>
 
       {/* Registration CTA Section */}
       <Container maxWidth="md" sx={{ py: { xs: 4, sm: 6, md: 8 }, display: 'flex', justifyContent: 'center'}}>
         <Card sx={{ minWidth: 275, maxWidth: { xs: '100%', sm: 500 }, width: '100%', boxShadow: 3,  bgcolor: '#FFF4E4' }}> {/* Added boxShadow for better visibility */}
           <CardContent sx={{ textAlign: 'center', px: { xs: 2, sm: 3 }, py: { xs: 3, sm: 4} }}>
-            <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 'medium' }}>
+            <Typography variant="h5" component="h2" gutterBottom color='#6A9C89' sx={{ fontWeight: 'medium' }}>
               Pronto a Festeggiare con Noi?
             </Typography>
             <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
@@ -199,10 +202,10 @@ const HomePage: React.FC = () => {
             <Button
               variant="outlined"
               sx={{
-                  borderColor: '#FFA725',
+                  borderColor: '#6A9C89',
                   color: '#000',
                   '&:hover': {
-                    backgroundColor: '#FFA725',
+                    backgroundColor: '#6A9C89',
                   },minWidth: '200px'}}
               component={Link}
               to="/partecipazione"

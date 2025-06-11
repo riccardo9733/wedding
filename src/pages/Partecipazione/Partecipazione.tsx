@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { darken } from '@mui/material/styles';
+import Container from '@mui/material/Container';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormLabel from '@mui/material/FormLabel';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import Snackbar from '@mui/material/Snackbar';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import React, { useEffect, useState } from 'react';
+import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
 
 interface IFormInput {
   nome: string;
@@ -78,6 +77,7 @@ const PartecipazionePage: React.FC = () => {
     if (reason === 'clickaway') {
       return;
     }
+    console.log(event)
     setOpenSnackbar(false);
   };
 
@@ -89,7 +89,7 @@ const PartecipazionePage: React.FC = () => {
     <Container maxWidth={false}  sx={{ pt: 4, pb: 4, backgroundColor: '#FFF5E4' }} >
       <Box sx={{height: heroHeight}}>
 
-      <Typography variant="h3" component="h1" gutterBottom align="center">
+      <Typography color='#6A9C89' variant="h3" component="h1" gutterBottom align="center">
         Partecipazione
       </Typography>
       <Typography variant="body1" component="p" gutterBottom align="center">
@@ -111,14 +111,14 @@ const PartecipazionePage: React.FC = () => {
                     flexGrow: 1,
                     '& .MuiOutlinedInput-root': {
                       '&.Mui-focused fieldset': {
-                        borderColor: '#FFA725',
+                        borderColor: '#6A9C89',
                       },
                       '&:hover fieldset': {
-                        borderColor: '#FFA725',
+                        borderColor: '#6A9C89',
                       },
                     },
                     '& label.Mui-focused': {
-                      color: '#FFA725',
+                      color: '#6A9C89',
                     },
                   }}
                 />
@@ -133,14 +133,14 @@ const PartecipazionePage: React.FC = () => {
                     flexGrow: 1,
                     '& .MuiOutlinedInput-root': {
                       '&.Mui-focused fieldset': {
-                        borderColor: '#FFA725',
+                        borderColor: '#6A9C89',
                       },
                       '&:hover fieldset': {
-                        borderColor: '#FFA725',
+                        borderColor: '#6A9C89',
                       },
                     },
                     '& label.Mui-focused': {
-                      color: '#FFA725',
+                      color: '#6A9C89',
                     },
                   }}
                 />
@@ -181,14 +181,14 @@ const PartecipazionePage: React.FC = () => {
                   sx={{
                     '& .MuiOutlinedInput-root': {
                       '&.Mui-focused fieldset': {
-                        borderColor: '#FFA725',
+                        borderColor: '#6A9C89',
                       },
                       '&:hover fieldset': {
-                        borderColor: '#FFA725',
+                        borderColor: '#6A9C89',
                       },
                     },
                     '& label.Mui-focused': {
-                      color: '#FFA725',
+                      color: '#6A9C89',
                     },
                   }}
                 />
@@ -204,14 +204,14 @@ const PartecipazionePage: React.FC = () => {
                 sx={{
                   '& .MuiOutlinedInput-root': {
                     '&.Mui-focused fieldset': {
-                      borderColor: '#FFA725',
+                      borderColor: '#6A9C89',
                     },
                     '&:hover fieldset': {
-                      borderColor: '#FFA725',
+                      borderColor: '#6A9C89',
                     },
                   },
                   '& label.Mui-focused': {
-                    color: '#FFA725',
+                    color: '#6A9C89',
                   },
                 }}
               />
@@ -222,10 +222,10 @@ const PartecipazionePage: React.FC = () => {
                 size="large"
                 fullWidth
                 sx={{
-                  borderColor: '#FFA725',
+                  borderColor: '#6A9C89',
                   color: '#000',
                   '&:hover': {
-                    backgroundColor: '#FFA725',
+                    backgroundColor: '#6A9C89',
                   },
                   mt: 2, // Added margin top for spacing from the field above
                 }}
