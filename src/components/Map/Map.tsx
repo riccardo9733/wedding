@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css'; // Import leaflet CSS
+import L from 'leaflet';
 
 // It's good practice to define props type
 interface MapComponentProps {

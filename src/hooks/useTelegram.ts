@@ -1,8 +1,8 @@
 // src/hooks/useTelegram.ts
 import { useState } from 'react';
 
-const TELEGRAM_BOT_TOKEN = 'YOUR_TELEGRAM_BOT_TOKEN_PLACEHOLDER';
-const TELEGRAM_CHAT_ID = 'YOUR_TELEGRAM_CHAT_ID_PLACEHOLDER';
+const TELEGRAM_BOT_TOKEN = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
+const TELEGRAM_CHAT_ID = import.meta.env.VITE_TELEGRAM_CHAT_ID;
 
 export interface IFormInput {
   nome: string;
