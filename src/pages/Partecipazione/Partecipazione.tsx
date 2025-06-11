@@ -15,57 +15,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from 'react';
 import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
-
-const TELEGRAM_BOT_TOKEN = 'YOUR_TELEGRAM_BOT_TOKEN_PLACEHOLDER';
-const TELEGRAM_CHAT_ID = 'YOUR_TELEGRAM_CHAT_ID_PLACEHOLDER';
-
-interface IFormInput {
-  nome: string;
-  cognome: string;
-  partecipera: 'si' | 'no' | '';
-  quantita: number | '';
-  richiesteSpeciali?: string;
-}
-
-const sendTelegramMessage = async (data: IFormInput) => {
-  // Ensure constants are defined (they should be from the previous step)
-  const BOT_TOKEN = TELEGRAM_BOT_TOKEN || 'YOUR_TELEGRAM_BOT_TOKEN_PLACEHOLDER';
-  const CHAT_ID = TELEGRAM_CHAT_ID || 'YOUR_TELEGRAM_CHAT_ID_PLACEHOLDER';
-
-  const message = `
-Nome: ${data.nome}
-Cognome: ${data.cognome}
-Parteciperà: ${data.partecipera}
-Quantità: ${data.partecipera === 'si' ? data.quantita : 'N/A'}
-Richieste Speciali: ${data.richiesteSpeciali || 'Nessuna'}
-  `.trim();
-
-  const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text: message,
-      }),
-    });
-
-    if (response.ok) {
-      return { ok: true };
-    } else {
-      const errorData = await response.json();
-      console.error('Error sending Telegram message:', errorData);
-      return { ok: false, error: errorData };
-    }
-  } catch (error) {
-    console.error('Network error sending Telegram message:', error);
-    return { ok: false, error };
-  }
-};
+import useTelegram, { type IFormInput } from '../../hooks/useTelegram';
 
 const PartecipazionePage: React.FC = () => {
   const {
@@ -90,6 +40,7 @@ const PartecipazionePage: React.FC = () => {
   const [message, setMessage] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarSeverity, setSnackbarSeverity] = useState<'success' | 'error'>('success');
+  const { sendMessage, isLoading, error: telegramError } = useTelegram(); // Use `error` from hook
 
   const watchPartecipera = watch('partecipera');
 
@@ -100,7 +51,6 @@ const PartecipazionePage: React.FC = () => {
   }, [watchPartecipera, setValue]);
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    // Submission logic
     console.log('Nome:', data.nome);
     console.log('Cognome:', data.cognome);
     console.log('Parteciperà:', data.partecipera);
@@ -109,15 +59,17 @@ const PartecipazionePage: React.FC = () => {
     }
     console.log('Richieste Speciali:', data.richiesteSpeciali);
 
-    const telegramResult = await sendTelegramMessage(data);
+    const success = await sendMessage(data); // Call hook's sendMessage
 
     const guestText = data.partecipera === 'si' ? `${data.quantita} ospiti` : 'non parteciperà';
 
-    if (telegramResult.ok) {
+    if (success) {
       setMessage(`Grazie ${data.nome} ${data.cognome}, la tua conferma (${guestText}) è stata inviata! Richieste speciali: "${data.richiesteSpeciali || 'Nessuna'}".`);
       setSnackbarSeverity('success');
     } else {
-      setMessage(`Si è verificato un errore durante l'invio della tua partecipazione. Riprova più tardi.`);
+      // Optionally use telegramError from the hook if it's user-friendly
+      // For now, using a generic message as requested.
+      setMessage(telegramError || `Si è verificato un errore durante l'invio della tua partecipazione. Riprova più tardi.`);
       setSnackbarSeverity('error');
     }
 
@@ -300,19 +252,19 @@ const PartecipazionePage: React.FC = () => {
               <Button
                 type="submit"
                 variant="outlined"
-                // color="primary" // Overridden by sx
                 size="large"
                 fullWidth
+                disabled={isLoading} // Disable button when loading
                 sx={{
                   borderColor: '#6A9C89',
                   color: '#000',
                   '&:hover': {
                     backgroundColor: '#6A9C89',
                   },
-                  mt: 2, // Added margin top for spacing from the field above
+                  mt: 2,
                 }}
               >
-                Invia Partecipazione
+                {isLoading ? 'Invio in corso...' : 'Invia Partecipazione'}
               </Button>
             </Stack>
           </Box>
