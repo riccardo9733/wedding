@@ -16,6 +16,9 @@ import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from 'react';
 import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
 
+const TELEGRAM_BOT_TOKEN = 'YOUR_TELEGRAM_BOT_TOKEN_PLACEHOLDER';
+const TELEGRAM_CHAT_ID = 'YOUR_TELEGRAM_CHAT_ID_PLACEHOLDER';
+
 interface IFormInput {
   nome: string;
   cognome: string;
@@ -23,6 +26,46 @@ interface IFormInput {
   quantita: number | '';
   richiesteSpeciali?: string;
 }
+
+const sendTelegramMessage = async (data: IFormInput) => {
+  // Ensure constants are defined (they should be from the previous step)
+  const BOT_TOKEN = TELEGRAM_BOT_TOKEN || 'YOUR_TELEGRAM_BOT_TOKEN_PLACEHOLDER';
+  const CHAT_ID = TELEGRAM_CHAT_ID || 'YOUR_TELEGRAM_CHAT_ID_PLACEHOLDER';
+
+  const message = `
+Nome: ${data.nome}
+Cognome: ${data.cognome}
+Parteciperà: ${data.partecipera}
+Quantità: ${data.partecipera === 'si' ? data.quantita : 'N/A'}
+Richieste Speciali: ${data.richiesteSpeciali || 'Nessuna'}
+  `.trim();
+
+  const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: message,
+      }),
+    });
+
+    if (response.ok) {
+      return { ok: true };
+    } else {
+      const errorData = await response.json();
+      console.error('Error sending Telegram message:', errorData);
+      return { ok: false, error: errorData };
+    }
+  } catch (error) {
+    console.error('Network error sending Telegram message:', error);
+    return { ok: false, error };
+  }
+};
 
 const PartecipazionePage: React.FC = () => {
   const {
@@ -56,7 +99,7 @@ const PartecipazionePage: React.FC = () => {
     }
   }, [watchPartecipera, setValue]);
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     // Submission logic
     console.log('Nome:', data.nome);
     console.log('Cognome:', data.cognome);
@@ -66,9 +109,18 @@ const PartecipazionePage: React.FC = () => {
     }
     console.log('Richieste Speciali:', data.richiesteSpeciali);
 
+    const telegramResult = await sendTelegramMessage(data);
+
     const guestText = data.partecipera === 'si' ? `${data.quantita} ospiti` : 'non parteciperà';
-    setMessage(`Grazie ${data.nome} ${data.cognome}, la tua conferma (${guestText}) è stata inviata! Richieste speciali: "${data.richiesteSpeciali || 'Nessuna'}". (Simulazione)`);
-    setSnackbarSeverity('success');
+
+    if (telegramResult.ok) {
+      setMessage(`Grazie ${data.nome} ${data.cognome}, la tua conferma (${guestText}) è stata inviata! Richieste speciali: "${data.richiesteSpeciali || 'Nessuna'}".`);
+      setSnackbarSeverity('success');
+    } else {
+      setMessage(`Si è verificato un errore durante l'invio della tua partecipazione. Riprova più tardi.`);
+      setSnackbarSeverity('error');
+    }
+
     setOpenSnackbar(true);
     reset(); // Reset form using react-hook-form's reset
   };
