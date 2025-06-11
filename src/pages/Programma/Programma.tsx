@@ -12,6 +12,7 @@ import CelebrationIcon from '@mui/icons-material/Celebration';
 // List components
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import MapComponent from '../../components/Map';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
@@ -176,6 +177,14 @@ const ProgrammaPage: React.FC = () => {
       <Container maxWidth="lg" sx={{ pt: { xs: 2, sm: 3, md: 4 }, pb: { xs: 3, sm: 4, md: 6 } }}>
       
         <Gallery images={galleryItemData} enableRandomCols={true} />
+      </Container>
+
+      {/* Map Section */}
+      <Container maxWidth="lg" sx={{ pt: { xs: 2, sm: 3, md: 4 }, pb: { xs: 4, sm: 6, md: 8 } }}> {/* Consistent padding */}
+        <Typography variant="h5" component="h3" textAlign="center" color='#6A9C89' sx={{ mb: { xs: 2, sm: 3 } }}>
+          Come Raggiungerci
+        </Typography>
+        <MapComponent latitude={45.51125023473768} longitude={11.65794930023021} zoom={15} markerText="Locanda dei Sposini" />
       </Container>
 
       
